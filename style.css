@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+  --blue: rgb(0, 187, 255);
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: abel;
+  src: url(./Abel/Abel-Regular.ttf);
+}
+
+body {
+  background: rgb(63, 94, 251);
+  background: radial-gradient(
+    circle,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+  font-family: abel;
+}
+
+h1 {
+  margin: 0;
+}
+
+input {
+  justify-content: center;
+  align-items: center;
+  margin: 0.6rem 0 0.6rem 0;
+  height: 1.5rem;
+  font-weight: 300;
+  width: 100%;
+  border-radius: 3px;
+  border: none;
+}
+
+.container-popup {
+  background: rgba(0, 0, 0, 0.514);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10.7px);
+  -webkit-backdrop-filter: blur(10.7px);
+  border: 1px solid rgb(0, 0, 0);
+
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  border-radius: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button {
+  height: 2rem;
+  width: 5rem;
+  margin: 1rem;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+}
+
+textarea {
+  width: 100%;
+  border-radius: 3px;
+  resize: vertical;
+  border: none;
+  /* height: 5em; */
+}
+
+.container-links {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  text-align: center;
+  gap: 1rem;
+}
+
+.link {
+  min-height: 20rem;
+  background-color: #3c0856;
+  border-radius: 5px;
+  color: white;
+  align-items: center;
+}
+
+.link ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.link a {
+  text-decoration: none;
+  color: white;
+}
+
+.link li {
+  margin: 8px 0;
+}
+
+.urls {
+  max-height: 10rem;
+  max-width: 100%;
+  overflow-y: scroll;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  cursor: pointer;
+}
+
+.add h1 {
+  background-color: white;
+  padding: 1.2rem;
+  width: 4.8rem;
+  border-radius: 100%;
+}
+
+.edit-btn {
+  background-color: rgb(0, 255, 136);
+  position: relative;
+  width: 5em;
+  left: 33%;
+}
+.close-btn {
+  background-color: red;
+  color: white;
+  width: 2rem;
+  position: relative;
+  left: 27%;
+}
+
+.close-btn:nth-child(1) {
+  left: 47%;
+}
+
+.hidden {
+  display: none;
+}
+
+.add-open {
+  background-color: var(--blue);
+}
