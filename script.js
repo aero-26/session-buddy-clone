@@ -9,6 +9,7 @@ const popupTitle = popup.querySelector("input");
 const popupTextArea = popup.querySelector("textarea");
 const addDoneBtn = document.querySelector(".add-done-btn");
 const closePopUp = document.querySelector(".popup-close");
+const addBtn = document.querySelector(".add");
 
 // Applying click event to EDIT button
 for (let i = 0; i < link.length; i++) {
@@ -25,12 +26,9 @@ for (let i = 0; i < link.length; i++) {
 
 // Edit button function
 const openDeatils = (i) => {
-  // Disabling the click on other stuffs other than the popup
-  body.style.pointerEvents = "none";
-  popup.style.pointerEvents = "auto";
+  disableClick();
+  showPopUp();
 
-  // Making popup visible and chaning the button text
-  popup.classList.remove("hidden");
   addDoneBtn.innerText = "Done";
 
   // Entering the H1 as input text
@@ -62,4 +60,19 @@ closePopUp.addEventListener("click", () => {
   popup.querySelector("textarea").value = "";
   popup.classList.add("hidden");
   body.style.pointerEvents = "auto";
+});
+
+// Function to disable click outside the popup and show popup function
+const disableClick = () => {
+  body.style.pointerEvents = "none";
+  popup.style.pointerEvents = "auto";
+};
+const showPopUp = () => {
+  popup.classList.remove("hidden");
+};
+
+// Add button functionality (INCOMPLETE)
+addBtn.addEventListener("click", () => {
+  showPopUp();
+  disableClick();
 });
