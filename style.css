@@ -76,7 +76,7 @@ textarea {
 }
 
 .container-links {
-  width: 100%;
+  width: 95.5dvw;
   display: grid;
   grid-template-columns: repeat(4, 25%);
   text-align: center;

@@ -1,28 +1,38 @@
 "use strict";
 
 const body = document.querySelector("body");
-const editBtn = document.querySelectorAll(".edit-btn");
-const link = document.querySelectorAll(".link");
-const linkCloseBtn = document.querySelectorAll(".delete");
+let editBtn = document.querySelectorAll(".edit-btn");
+
+let linkCloseBtn = document.querySelectorAll(".delete");
 const popup = document.querySelectorAll(".container-popup")[0];
 const popupTitle = popup.querySelector("input");
 const popupTextArea = popup.querySelector("textarea");
 const addDoneBtn = document.querySelector(".add-done-btn");
 const closePopUp = document.querySelector(".popup-close");
 const addBtn = document.querySelector(".add");
+const addPopupBtn = document.querySelector(".add-open");
+const linkContainer = document.querySelector(".container-links");
+let link = document.querySelectorAll(".link");
 
-// Applying click event to EDIT button
-for (let i = 0; i < link.length; i++) {
-  editBtn[i]?.addEventListener("click", () => {
-    openDeatils(i);
-  });
-}
+// Applying click event to EDIT button and Close button
+const activateEditBtn = () => {
+  for (let i = 0; i < link.length; i++) {
+    editBtn[i]?.addEventListener("click", () => {
+      openDeatils(i);
+    });
+  }
+};
 
-for (let i = 0; i < link.length; i++) {
-  linkCloseBtn[i]?.addEventListener("click", () => {
-    console.log(link[i]);
-  });
-}
+const activateCloseBtn = () => {
+  for (let i = 0; i < link.length; i++) {
+    linkCloseBtn[i]?.addEventListener("click", () => {
+      console.log(link[i]);
+    });
+  }
+};
+
+activateEditBtn();
+activateCloseBtn();
 
 // Edit button function
 const openDeatils = (i) => {
@@ -32,10 +42,10 @@ const openDeatils = (i) => {
   addDoneBtn.innerText = "Done";
 
   // Entering the H1 as input text
-  popupTitle.value = link[i].querySelector("h1").innerText;
+  popupTitle.value = link[i]?.querySelector("h1").innerText;
 
   // Copying the links into an array
-  let urlsList = link[i].querySelector("ul").querySelectorAll("li");
+  let urlsList = link[i]?.querySelector("ul").querySelectorAll("li");
   let urlsArray = [];
 
   for (let i = 0; i < urlsList.length; i++) {
@@ -71,8 +81,77 @@ const showPopUp = () => {
   popup.classList.remove("hidden");
 };
 
-// Add button functionality (INCOMPLETE)
+// Add button functionality
 addBtn.addEventListener("click", () => {
   showPopUp();
   disableClick();
 });
+
+// Clicking to Edit/Add btn within popup
+addPopupBtn.addEventListener("click", () => {
+  if (addPopupBtn.innerText === "Add") {
+    pushLinks();
+    templateForLinks(arrForNewElement);
+    activateEditBtn();
+    closePopUp.click();
+  } else if (addDoneBtn.innerText === "Done") {
+    console.log();
+  }
+});
+
+// Function to push array objects from text area
+let arrForNewElement = [];
+
+// Pushing the links within the textbox to array arrForNewElement.
+const pushLinks = () => {
+  arrForNewElement.push(popupTitle.value);
+  let links = popupTextArea.value.split("\n");
+  arrForNewElement.push(...links);
+};
+
+// Making the final template to be pushed in the HTML
+const templateForLinks = (arr) => {
+  let urls = [];
+
+  for (let i = 1; i < arr.length; i++) {
+    let urlTemplate = `
+            <li>
+              <a
+                href="${arr[i]}"
+                target="_blank"
+                title="${arr[i]}"
+                >${arr[i]}</a
+              >
+            </li>`;
+    urls.push(urlTemplate);
+  }
+
+  let finalLi = urls.join("\n");
+
+  let tempTemplate = document.createElement("div");
+
+  tempTemplate.classList.add("link");
+
+  tempTemplate.innerHTML = ` 
+        <button class="edit-btn">Edit</button>
+        <button class="close-btn delete">X</button>
+        <h1>${arr[0]}</h1>
+        <div class="urls">
+          <ul>
+            ${finalLi} 
+          </ul>
+        </div>
+        <button class="add-open">Open All</button>`;
+
+  linkContainer.insertAdjacentElement("afterbegin", tempTemplate);
+
+  console.log(tempTemplate);
+  link = document.querySelectorAll(".link");
+  editBtn = document.querySelectorAll(".edit-btn");
+  linkCloseBtn = document.querySelectorAll(".delete");
+  activateEditBtn();
+  activateCloseBtn();
+
+  // Emptying the array
+  arrForNewElement = [];
+};
