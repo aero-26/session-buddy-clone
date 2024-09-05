@@ -7,7 +7,6 @@ let linkCloseBtn = document.querySelectorAll(".delete");
 const popup = document.querySelectorAll(".container-popup")[0];
 const popupTitle = popup.querySelector("input");
 const popupTextArea = popup.querySelector("textarea");
-const addDoneBtn = document.querySelector(".add-done-btn");
 const closePopUp = document.querySelector(".popup-close");
 const addBtn = document.querySelector(".add");
 const addPopupBtn = document.querySelector(".add-open");
@@ -39,7 +38,7 @@ const openDeatils = (i) => {
   disableClick();
   showPopUp();
 
-  addDoneBtn.innerText = "Done";
+  addPopupBtn.innerText = "Done";
 
   // Entering the H1 as input text
   popupTitle.value = link[i]?.querySelector("h1").innerText;
@@ -65,7 +64,7 @@ const openDeatils = (i) => {
 
 // Adding functionality for closing popup
 closePopUp.addEventListener("click", () => {
-  addDoneBtn.innerText = "Add";
+  addPopupBtn.innerText = "Add";
   popup.querySelector("input").value = "";
   popup.querySelector("textarea").value = "";
   popup.classList.add("hidden");
@@ -89,14 +88,10 @@ addBtn.addEventListener("click", () => {
 
 // Clicking to Edit/Add btn within popup
 addPopupBtn.addEventListener("click", () => {
-  if (addPopupBtn.innerText === "Add") {
-    pushLinks();
-    templateForLinks(arrForNewElement);
-    activateEditBtn();
-    closePopUp.click();
-  } else if (addDoneBtn.innerText === "Done") {
-    console.log();
-  }
+  pushLinks();
+  templateForLinks(arrForNewElement);
+  activateEditBtn();
+  closePopUp.click();
 });
 
 // Function to push array objects from text area
@@ -143,9 +138,14 @@ const templateForLinks = (arr) => {
         </div>
         <button class="add-open">Open All</button>`;
 
-  linkContainer.insertAdjacentElement("afterbegin", tempTemplate);
+  // Adding condition to add the links
+  if (addPopupBtn.innerText === "Add") {
+    linkContainer.insertAdjacentElement("afterbegin", tempTemplate);
+  }
 
   console.log(tempTemplate);
+
+  // Reselecting the elements to activate them dynamially
   link = document.querySelectorAll(".link");
   editBtn = document.querySelectorAll(".edit-btn");
   linkCloseBtn = document.querySelectorAll(".delete");
