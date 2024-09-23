@@ -1,0 +1,38 @@
+@media screen and (max-width: 1380px) {
+  .edit-btn {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .edit-btn {
+    margin-left: 16px;
+  }
+
+  .container-links {
+    grid-template-columns: repeat(3, 33.33%);
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .edit-btn {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .close-btn {
+    margin-left: 6px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .edit-btn {
+    margin-left: -10%;
+  }
+}
+@media screen and (max-width: 675px) {
+  .edit-btn {
+    margin-left: -17%;
+  }
+}
